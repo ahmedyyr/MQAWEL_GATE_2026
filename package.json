@@ -1,0 +1,15 @@
+{
+  "name": "mqawel_gate_2026",
+  "version": "1.0.0",
+  "description": "بوابة مقاول 2026",
+  "main": "1_server.js",
+  "scripts": {
+    "start": "node 1_server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "ejs": "^4.0.1",
+    "mongoose": "^9.2.4",
+    "express-session": "^1.19.0"
+  }
+}

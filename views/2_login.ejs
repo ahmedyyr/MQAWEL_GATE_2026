@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>بوابة مقاول | دخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo'; background: #0b0b0b; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #1a1a1a; padding: 40px; border-radius: 25px; border: 1px solid #ffcc00; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1 { color: #ffcc00; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 15px 0; border-radius: 10px; border: none; background: #2a2a2a; color: white; text-align: center; }
+        button { background: #ffcc00; color: #000; padding: 12px 40px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>بوابة مُقاول</h1>
+        <p>مرحباً بك، سجل دخولك للبدء</p>
+        <input type="text" id="name" placeholder="اكتب اسمك بالكامل">
+        <button onclick="login()">دخول المنصة</button>
+    </div>
+    <script>
+        async function login() {
+            const name = document.getElementById('name').value;
+            if(!name) return alert("فضلاً اكتب اسمك");
+            const res = await fetch('/auth', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ name })
+            });
+            const data = await res.json();
+            if(data.success) window.location.href = '/dashboard';
+        }
+    </script>
+</body>
+</html>
