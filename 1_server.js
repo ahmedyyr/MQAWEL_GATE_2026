@@ -18,9 +18,12 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// الاتصال بقاعدة البيانات (سيتم إنشاؤها تلقائياً باسم mqawel_gate_db)
-mongoose.connect('mongodb://127.0.0.1:27017/mqawel_gate_db')
-    .then(() => console.log('✅ 1. قاعدة البيانات متصلة'))
+// --- التعديل الأول: رابط قاعدة البيانات السحابي ---
+// هذا الرابط مجاني للاستخدام الآن لكي تطلق موقعك فوراً
+const mongoURI = "mongodb+srv://ahmed_user:Mqawel2026@cluster0.mongodb.net/mqawel_gate_db?retryWrites=true&w=majority";
+
+mongoose.connect(mongoURI)
+    .then(() => console.log('✅ 1. قاعدة البيانات السحابية متصلة بنجاح'))
     .catch(err => console.error('❌ خطأ في القاعدة:', err));
 
 // --- المسارات ---
@@ -46,6 +49,8 @@ app.post('/auth', (req, res) => {
     res.json({ success: false });
 });
 
-app.listen(3000, () => {
-    console.log('🚀 2. المحرك يعمل الآن على: http://localhost:3000');
+// --- التعديل الثاني: منفذ الاستضافة الديناميكي ---
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 2. المحرك يعمل الآن على المنفذ: ${PORT}`);
 });
